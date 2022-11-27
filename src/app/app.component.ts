@@ -10,9 +10,10 @@ import { StockService } from './stock.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public stocks!: CompanyStock[];
-  public editStock!: CompanyStock;
-  public deleteStock!: CompanyStock;
+  public stock: CompanyStock;
+  public stocks: CompanyStock[];
+  public editStock: CompanyStock;
+  public deleteStock: CompanyStock;
 
   constructor(private stockService: StockService) { }
 
@@ -21,54 +22,55 @@ export class AppComponent implements OnInit {
   }
 
   public getStocks(): void {
-    this.stockService.getStocks().subscribe(
-      (response: CompanyStock[]) => {
+    this.stockService.getStocks().subscribe({
+      next: response => {
         this.stocks = response;
         console.log(this.stocks);
       },
-      (error: HttpErrorResponse) => {
+      error: error => {
         alert(error.message);
       }
-    );
+    });
   }
 
   public onAddStock(addForm: NgForm): void {
-    document.getElementById('add-stock-form')?.click();
-    this.stockService.addStock(addForm.value).subscribe(
-      (response: CompanyStock) => {
-        console.log(response);
-        this.getStocks();
-        addForm.reset();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
-      }
-    );
+    document.getElementById('add-stock-form').click();
+    this.stockService.addStock(addForm.value)
+      .subscribe({
+        next: response => {
+          console.log(response);
+          this.getStocks();
+          addForm.reset();
+        },
+        error: error => {
+          alert(error.message);
+          addForm.reset();
+        }
+      });
   }
 
   public onUpdateStock(stock: CompanyStock): void {
-    this.stockService.updateStock(stock).subscribe(
-      (response: CompanyStock) => {
+    this.stockService.updateStock(stock).subscribe({
+      next: response => {
         console.log(response);
         this.getStocks();
       },
-      (error: HttpErrorResponse) => {
+      error: error => {
         alert(error.message);
       }
-    );
+    });
   }
 
   public onDeleteStock(id: number): void {
-    this.stockService.deleteStock(id).subscribe(
-      (response: void) => {
+    this.stockService.deleteStock(id).subscribe({
+      next: response => {
         console.log(response);
         this.getStocks();
       },
-      (error: HttpErrorResponse) => {
+      error: error => {
         alert(error.message);
       }
-    );
+    });
   }
 
   public searchStocks(key: string): void {
@@ -108,9 +110,6 @@ export class AppComponent implements OnInit {
     container?.appendChild(button);
     button.click();
   }
-
-
-
 }
 
 

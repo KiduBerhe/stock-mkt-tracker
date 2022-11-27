@@ -8,7 +8,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Stock <span class="sr-only">(current)</span></a>
+        <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Stock <span class="sr-only">(current)</span>  </a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -26,13 +26,13 @@
             <a href=""><img src="{{stock?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
           </div>
           <div class="col-6 card-title align-self-center mb-0">
-            <h5>{{stock?.companyName}}</h5>
+            <h5>{{stock?.companyName }}</h5>
             <p class="m-0">{{stock?.tickerSymbol}}</p>
           </div>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Stocks: {{stock?.stocks}}</li>
-          <li class="list-group-item"><i class="fa fa-phone float-right"></i>Price : {{stock?.price}}</li>
+          <li class="list-group-item"><i class="fa fa-phone float-right"></i>Stocks: {{stock?.stocks}}</li>
         </ul>
         <div class="card-body">
           <div class="float-right btn-group btn-group-sm">
@@ -60,8 +60,8 @@
       <div class="modal-body">
         <form #addForm="ngForm" (ngSubmit)="onAddStock(addForm)">
           <div class="form-group">
-            <label for="name">Company Name</label>
-            <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Company Name" required>
+            <label for="companyName">Company Name</label>
+            <input type="text" ngModel name="companyName" class="form-control" id="companyName" placeholder="Company Name" required>
           </div>
           <div class="form-group">
             <label for="tickerSymbol">Ticker Symbol</label>
@@ -78,7 +78,7 @@
             <input type="number" ngModel name="price" class="form-control" id="price" placeholder="Stocks Price" required>
           </div>
           <div class="form-group">
-            <label for="phone">Image URL</label>
+            <label for="imageUrl">Image URL</label>
             <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL" required>
           </div>
           <div class="modal-footer">
@@ -98,7 +98,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateStockModalLabel">Edit Stock {{editStock.companyName}}</h5>
+        <h5 class="modal-title" id="updateStockModalLabel">Edit Stock {{editStock?.companyName}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -106,31 +106,31 @@
         <div class="modal-body">
           <form #editForm="ngForm">
             <div class="form-group">
-              <label for="name">Company Name</label>
-              <input type="text" ngModel="{{editStock.companyName}}" name="companyName" class="form-control" id="companyName"
-                aria-describedby="emailHelp" placeholder="Name">
+              <label for="companyName">Company Name</label>
+              <input type="text" ngModel="{{editStock?.companyName}}" name="companyName" class="form-control" id="companyName"
+                aria-describedby="emailHelp" placeholder="Company Name">
             </div>
-            <input type="hidden" ngModel="{{editStock.id}}" name="id" class="form-control" id="id" placeholder="tickerSymbol">
-            <input type="hidden" ngModel="{{editStock.tickerSymbol}}" name="userCode" class="form-control" id="userCode"
+            <input type="hidden" ngModel="{{editStock?.id}}" name="id" class="form-control" id="id" placeholder="id">
+            <input type="hidden" ngModel="{{editStock?.tickerSymbol}}" name="tickerSymbol" class="form-control" id="tickerSymbol"
               placeholder="Email">
             <div class="form-group">
               <label for="tickerSymbol">Ticker Symbol</label>
-              <input type="tickerSymbol" ngModel="{{editStock.tickerSymbol}}" name="tickerSymbol" class="form-control"
+              <input type="tickerSymbol" ngModel="{{editStock?.tickerSymbol}}" name="tickerSymbol" class="form-control"
                 id="tickerSymbol" placeholder="Ticker Symbol">
             </div>
             <div class="form-group">
               <label for="stocks">Number of Stocks</label>
-              <input type="number" ngModel="{{editStock.stocks}}" name="stocks" class="form-control" id="stocks"
+              <input type="number" ngModel="{{editStock?.stocks}}" name="stocks" class="form-control" id="stocks"
                 placeholder="Number of Stocks">
             </div>
             <div class="form-group">
               <label for="price">Price</label>
-              <input type="number" ngModel="{{editStock.price}}" name="price" class="form-control" id="price" name="price"
+              <input type="number" ngModel="{{editStock?.price}}" name="price" class="form-control" id="price" name="price"
                 placeholder="Price">
             </div>
             <div class="form-group">
-              <label for="phone">Image URL</label>
-              <input type="text" ngModel="{{editStock.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl"
+              <label for="imageUrl">Image URL</label>
+              <input type="text" ngModel="{{editStock?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl"
                 placeholder="Image URL">
             </div>
             <div class="modal-footer">
@@ -155,10 +155,10 @@
         </button>
       </div>
         <div class="modal-body">
-          <p>Are you sure you want to delete Stock {{deleteStock.companyName}}?</p>
+          <p>Are you sure you want to delete Stock {{deleteStock?.companyName}}?</p>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-            <button (click)="onDeleteStock(deleteStock.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+            <button (click)="onDeleteStock(deleteStock?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
           </div>
         </div>
         </div>
